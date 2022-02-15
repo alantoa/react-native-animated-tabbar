@@ -1,13 +1,12 @@
 import React, { useMemo, memo } from 'react';
 import { View, Text, LayoutChangeEvent } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { interpolateColor, useValue } from 'react-native-redash';
+import { useValue } from 'react-native-redash';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import { interpolate } from '../../../utilities';
 import type { BubbleTabBarItemProps } from '../types';
 import { styles } from './styles';
-
 const { add } = Animated;
 
 const BubbleTabBarItemComponent = ({
@@ -47,10 +46,8 @@ const BubbleTabBarItemComponent = ({
   //#endregion
 
   //#region styles
-  const animatedIconColor = interpolateColor(animatedFocus, {
-    inputRange: [0, 1],
-    outputRange: [icon.inactiveColor, icon.activeColor],
-  });
+  const animatedIconColor = icon.inactiveColor;
+
   const containerStyle = [
     styles.container,
     {
@@ -69,10 +66,7 @@ const BubbleTabBarItemComponent = ({
       paddingHorizontal: innerHorizontalSpace,
       paddingVertical: innerVerticalSpace,
       borderRadius: innerVerticalSpace * 2 + iconSize,
-      backgroundColor: interpolateColor(animatedFocus, {
-        inputRange: [0, 1],
-        outputRange: [background.inactiveColor, background.activeColor],
-      }),
+      backgroundColor: background.inactiveColor,
     },
   ];
   const labelContainerStyle = [
